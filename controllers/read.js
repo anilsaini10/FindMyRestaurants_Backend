@@ -12,10 +12,10 @@ const getAllRestaurent = async (req, res) => {
 
     // const collection = db.collection("RestaurentList");
 
-    
+
     const collection = db.collection('RestaurentList')
-   
-    const cursor = collection.find({ });
+
+    const cursor = collection.find({});
     var data = [];
     await cursor.forEach((item) => {
         // console.log(item);
@@ -26,8 +26,28 @@ const getAllRestaurent = async (req, res) => {
 };
 
 
+const deleteRestaurent = async (req, res) => {
+
+    const uri = url;
+    const client = new MongoClient(uri);
+
+    const db = client.db("Restaurent");
+
+    const collection = db.collection('RestaurentList')
+
+    const cursor = collection.deleteOne({ Name: req.body.Name })
+    // var data = [];
+    // await cursor.forEach((item) => {
+    //     data.push(item);
+    // });
+
+    return res.send({ "data": "Done" });
+};
+
+
 module.exports = {
 
     allRestaturent: getAllRestaurent,
+    delete: deleteRestaurent,
 
 };
