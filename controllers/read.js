@@ -8,10 +8,10 @@ const db = client.db("Restaurent");
 
 const getAllRestaurent = async (req, res) => {
 
-    const uri = url;
-    const client = new MongoClient(uri);
+    // const uri = url;
+    // const client = new MongoClient(uri);
 
-    const db = client.db("Restaurent");
+    // const db = client.db("Restaurent");
 
     // const collection = db.collection("RestaurentList");
 
