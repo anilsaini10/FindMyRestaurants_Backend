@@ -2,12 +2,19 @@ const { request } = require('express');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const url = require("../URL/url");
 const uri = url;
-    const client = new MongoClient(uri);
+const client = new MongoClient(uri);
 
-    const db = client.db("Restaurent");
+const db = client.db("Restaurent");
 const createRestaurent = async (req, res) => {
 
     console.log(req.body);
+
+    if (req.body.name == "" || req.body.address == "" || req.body.contact == "" || req.body.shop_name == "" ||
+        req.body.Pincode == "" || req.body.city == "" || req.body.state == "" || req.body.type_of_restaurent == "" || req.body.timing == "") {
+
+        return req.send({ "Error": "Invalid Inputs" });
+    }
+
     const collection = db.collection("RestaurentList");
 
     await collection.insertOne({
@@ -21,25 +28,33 @@ const createRestaurent = async (req, res) => {
         "State": request.body.state,
         "Type_Of_Restaurent": request.body.type_of_restaurent,
         "Timing": request.body.timing,
-
+        "Image": request.body.url
 
     });
 
     return res.send({ "Success": "done" });
 };
-const createOwner= async (req,res)=>{
-    const resturentOwner=db.collection("resturentOwner");
+
+const createOwner = async (req, res) => {
+
+    if (req.body.Username == "" || req.body.Password == "" || req.body.Username == null || req.body.Password == null || req.body.Username == undefined || req.body.Password == undefined) {
+        return req.send({ "Error": "Invalid Inputs" });
+    }
+
+    const resturentOwner = db.collection("resturentOwner");
 
     await resturentOwner.insertOne({
-        "ownerName":req.body.name,
-        "contact":req.body.number,
+        "Username": req.body.Username,
+        "Password": req.body.Password,
     });
-    return res.send({"Success":"Done"});
+
+    return res.send({ "Success": "User Is Created" });
 };
 
 
 module.exports = {
 
     createRestaurent: createRestaurent,
-    createOwner:createOwner
+    createOwner: createOwner,
+
 };
