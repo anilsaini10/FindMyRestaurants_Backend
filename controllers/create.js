@@ -10,7 +10,7 @@ const createRestaurent = async (req, res) => {
     console.log(req.body);
 
     if (req.body.name == "" || req.body.address == "" || req.body.contact == "" || req.body.shop_name == "" ||
-        req.body.Pincode == "" || req.body.city == "" || req.body.state == "" || req.body.type_of_restaurent == "" || req.body.timing == "") {
+        req.body.pincode == "" || req.body.city == "" || req.body.state == "" || req.body.type_of_restaurent == "" || req.body.timing == "") {
 
         return req.send({ "Error": "Invalid Inputs" });
     }
